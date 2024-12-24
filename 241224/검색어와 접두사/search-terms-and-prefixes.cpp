@@ -5,7 +5,7 @@ using namespace std;
 
 // 변수 선언
 int n = 6; int m;
-string words[10000];  string q;
+string words[1000];  string q;
 
 // Trie에 사용되는 노드를 정의합니다.
 class TrieNode {
