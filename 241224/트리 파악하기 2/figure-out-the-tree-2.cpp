@@ -58,7 +58,7 @@ void InsertWord(string s) {
 void FindWord(TrieNode* t, int depth, int idx) {
     for (int i = 0; i < depth; i++) { cout << "--"; }
     
-    if (t->is_end) { cout << (char)(idx + 'A') << endl; return; }
+    //if (t->is_end) { cout << (char)(idx + 'A') << endl;}
     if (depth != -1) { cout << (char)(idx + 'A') << endl; }
     for (int index = 0; index < 26; index++) {
         if (t->children[index] != nullptr && !t->children[index]->visited) {
