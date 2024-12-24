@@ -68,13 +68,14 @@ bool FindWord(string s) {
 }
 
 int main() {
-    int a; cin >> a;
+    cin >> n;
 
     // Trie에 단어들을 넣어줍니다.
     for (int i = 0; i < n; i++) {
         cin >> words[i];
         InsertWord(words[i]);
     }
+
     bool exist = false;
     for (int i = 0; i < n; i++) {
         if (FindWord(words[i])) {
