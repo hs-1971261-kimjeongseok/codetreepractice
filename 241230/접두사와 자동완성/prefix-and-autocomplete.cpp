@@ -8,10 +8,10 @@ using namespace std;
 class TrieNode {
 public:
     TrieNode* children[26];
-    int prefix_count;
-    int child_count = 0;
+    int prefix_count; // 현재 노드에서 시작하는 접두사의 개수
+    bool is_end;      // 현재 노드가 단어의 끝인지 여부
 
-    TrieNode() : prefix_count(0) {
+    TrieNode() : prefix_count(0), is_end(false) {
         fill(begin(children), end(children), nullptr);
     }
 };
@@ -24,27 +24,30 @@ void InsertWord(const string& word) {
         int index = c - 'a';
         if (node->children[index] == nullptr) {
             node->children[index] = new TrieNode();
-            node->child_count++;
+            node->prefix_count++;
         }
         node = node->children[index];
-        node->prefix_count++;
+        
     }
+    node->is_end = true; // 단어의 끝 표시
 }
 
-int FindMaxScore(const string& word) {
+int FindManualInputs(const string& word) {
     TrieNode* node = root;
-    int max_score = 1;
+    int manual_inputs = 0;
+
     for (int i = 0; i < word.size(); i++) {
         int index = word[i] - 'a';
-        if (node->children[index] == nullptr) {
-            break;
-        }
-        if(node->children[index]->child_count != 1 && i != 0){
-            max_score++;
+        
+        
+        // 첫 문자는 항상 입력
+        if (i == 0 || node->prefix_count > 1 || node->is_end) {
+            manual_inputs++;
         }
         node = node->children[index];
     }
-    return max_score;
+
+    return manual_inputs;
 }
 
 int main() {
@@ -57,11 +60,10 @@ int main() {
         InsertWord(words[i]);
     }
 
-    int result = 0;
     for (const string& word : words) {
-        cout << FindMaxScore(word) - 1 << " ";
+        cout << FindManualInputs(word) << " ";
     }
+    cout << endl;
 
-    //cout << result << endl;
     return 0;
 }
