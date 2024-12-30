@@ -75,10 +75,10 @@ int main() {
     cin >> text;
 
     text = "#" + text;
-    int left = 0; int right = text.length() - 1; int mid;
+    int left = 1; int right = text.length() - 1; int mid;
     int res = 0;
 
-    while (left < right) {
+    while (left <= right) {
         mid = (left + right) / 2;
         string tmp = text.substr(1, mid);
         reverse(tmp.begin(), tmp.end());
@@ -93,7 +93,7 @@ int main() {
         }
     }
 
-    cout << res + 1;
+    cout << res;
     // 구현의 편의를 위해 맨 앞에 #을 붙여
     // 문자열을 1번지부터 사용합니다.
 
